@@ -1,0 +1,414 @@
+/* WorkCategoryPage — premium card gallery. Uniform 4:5 frames (3 / 2 / 1
+   columns), media shown whole with contain-fit on a dark matte — never
+   distorted or aggressively cropped. Sharp corners; same shell and tokens
+   as the home sections. */
+
+.page {
+  overflow-x: clip;
+  padding-top: calc(var(--nav-top) + var(--nav-h) + clamp(2rem, 6svh, 4rem));
+  padding-bottom: clamp(5rem, 12svh, 8rem);
+}
+
+.inner {
+  width: var(--shell-width);
+  margin-inline: auto;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  transition: color 0.4s var(--ease-out);
+}
+
+.backLink svg {
+  width: 1rem;
+  height: 1rem;
+  transition: translate 0.45s var(--ease-expo);
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  color: var(--color-text);
+}
+
+.backLink:hover svg,
+.backLink:focus-visible svg {
+  translate: -3px 0;
+}
+
+/* ---------- Header ---------- */
+
+.header {
+  margin-top: clamp(1.75rem, 5svh, 3rem);
+  padding-bottom: clamp(2.5rem, 6svh, 4rem);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.kicker {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Distinctive rose accent for the AI Video shelf kicker. */
+.kickerAccent {
+  color: var(--color-cta);
+  font-weight: 700;
+}
+
+.title {
+  margin: 1rem 0 0;
+  font-size: clamp(2.75rem, 8.5vw, 6.75rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.lede {
+  max-width: 34rem;
+  margin: clamp(1.25rem, 3svh, 1.75rem) 0 0;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.meta {
+  margin: 1.25rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ---------- Gallery: uniform premium card grid ---------- */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  margin: clamp(2.75rem, 7svh, 4.5rem) 0 0;
+}
+
+.cell {
+  min-width: 0;
+}
+
+.figure {
+  margin: 0;
+  transition: transform 0.6s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .cell:hover .figure {
+    transform: scale(1.02);
+  }
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 1.1rem;
+}
+
+.captionTop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.captionTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.captionYear {
+  flex: 0 0 auto;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.captionSub {
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.captionTags {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.captionDesc {
+  max-width: 32rem;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.captionLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-cta);
+}
+
+.captionLink svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  transition: transform 0.45s var(--ease-expo);
+}
+
+.captionLink:hover svg,
+.captionLink:focus-visible svg {
+  transform: translate(2px, -2px);
+}
+
+/* ---------- Empty shelf ---------- */
+
+.empty {
+  margin: clamp(2.75rem, 7svh, 4.5rem) 0 0;
+  padding: clamp(3rem, 9svh, 5.5rem) clamp(1.5rem, 5vw, 3rem);
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  text-align: center;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--color-muted);
+}
+
+/* ---------- Sibling navigation ---------- */
+
+.siblingNav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: clamp(4rem, 10svh, 6.5rem);
+  padding-top: clamp(2rem, 5svh, 3rem);
+  border-top: 1px solid var(--color-line);
+}
+
+.sibling {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  color: inherit;
+}
+
+.siblingNext {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.siblingLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  transition: color 0.4s var(--ease-out);
+}
+
+.siblingLabel svg {
+  width: 1rem;
+  height: 1rem;
+  transition: translate 0.45s var(--ease-expo);
+}
+
+.siblingTitle {
+  font-size: clamp(1.6rem, 4vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition:
+    color 0.45s var(--ease-out),
+    translate 0.5s var(--ease-expo);
+}
+
+.sibling:hover .siblingTitle,
+.sibling:focus-visible .siblingTitle {
+  color: var(--color-cta);
+}
+
+.siblingPrev:hover .siblingTitle,
+.siblingPrev:focus-visible .siblingTitle {
+  translate: -0.4rem 0;
+}
+
+.siblingNext:hover .siblingTitle,
+.siblingNext:focus-visible .siblingTitle {
+  translate: 0.4rem 0;
+}
+
+.sibling:hover .siblingLabel,
+.sibling:focus-visible .siblingLabel {
+  color: var(--color-text);
+}
+
+.siblingPrev:hover .siblingLabel svg,
+.siblingPrev:focus-visible .siblingLabel svg {
+  translate: -3px 0;
+}
+
+.siblingNext:hover .siblingLabel svg,
+.siblingNext:focus-visible .siblingLabel svg {
+  translate: 3px 0;
+}
+
+/* ---------- Loading skeleton ---------- */
+
+.skel {
+  border-radius: 2px;
+  background: linear-gradient(100deg, #101012 40%, #17171a 50%, #101012 60%);
+  background-size: 200% 100%;
+  animation: skel-slide 1.4s linear infinite;
+}
+
+@keyframes skel-slide {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.skelKicker {
+  width: 10rem;
+  height: 1rem;
+}
+
+.skelTitle {
+  width: min(26rem, 80%);
+  height: clamp(3rem, 8vw, 5rem);
+  margin-top: 1.25rem;
+}
+
+.skelLede {
+  width: min(32rem, 90%);
+  height: 4.5rem;
+  margin-top: 1.25rem;
+}
+
+.skelGrid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.skelGrid .skel {
+  min-height: 22rem;
+}
+
+/* ---------- Not found ---------- */
+
+.notFound {
+  padding-block: clamp(2rem, 8svh, 5rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.notFoundTitle {
+  margin: 0;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* ---------- Tablet: 2 cards per row ---------- */
+
+@media (max-width: 1024px) {
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skelGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 720px) {
+  .gallery {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .siblingNav {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .siblingNext {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .siblingNext:hover .siblingTitle,
+  .siblingNext:focus-visible .siblingTitle {
+    translate: -0.4rem 0;
+  }
+
+  .skelGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .skelGrid .skel {
+    min-height: 16rem;
+  }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .skel {
+    animation: none;
+  }
+
+  .figure {
+    transition: none;
+  }
+
+  .backLink svg,
+  .captionLink svg,
+  .siblingTitle,
+  .siblingLabel svg {
+    transition: none;
+  }
+}

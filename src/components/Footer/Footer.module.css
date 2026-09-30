@@ -1,0 +1,42 @@
+/* Footer — a whisper of a developer signature. Single centered link,
+   hairline top rule, generous air. Nothing else. */
+
+.footer {
+  border-top: 1px solid var(--color-line);
+  padding-block: clamp(2rem, 5svh, 3rem);
+  text-align: center;
+  overflow-x: clip;
+}
+
+.credit {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.role {
+  color: var(--color-muted);
+}
+
+.signature {
+  color: var(--color-rose-soft);
+  text-decoration: none;
+  transition: color 0.45s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .signature:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .signature {
+    transition: none;
+  }
+}

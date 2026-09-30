@@ -1,0 +1,54 @@
+/* Design tokens — the single source of truth for colour, type, motion and layout. */
+:root {
+  /* Colour */
+  --color-bg: #080808;
+  --color-bg-2: #111111;
+  --color-text: #f4f1ec;
+  --color-muted: #9a9791;
+  --color-accent: #a69b78;
+  --color-accent-2: #d6cfc0;
+  --color-line: rgba(255, 255, 255, 0.1);
+  --color-line-strong: rgba(255, 255, 255, 0.18);
+
+  /* CTA rose — Hero "View Work" button background (+ hover); also the About tenure number. */
+  --color-cta: #b96975;
+  --color-cta-hover: #a85460;
+
+  /* Soft dusty rose — Work section title. Muted and desaturated to stay
+     premium/editorial, never bright pink. */
+  --color-rose-soft: #c9a6a6;
+
+  /* Warm champagne — distinctive editorial headline accent. */
+  --color-champagne: #c8b98a;
+
+  /* Type */
+  --font-sans: 'Manrope Variable', 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    sans-serif;
+  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Layout */
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --container: 1400px;
+  /* Shared Navbar + Hero shell: single source for desktop max-width + gutters. */
+  --shell-max: 1280px;
+  --shell-width: min(90%, var(--shell-max));
+  --nav-top: 18px;
+  --nav-h: 68px;
+
+  /* Layers */
+  --z-menu: 40;
+  --z-nav: 50;
+  --z-grain: 100;
+}
+
+@media (max-width: 820px) {
+  :root {
+    --nav-top: 12px;
+    --nav-h: 60px;
+  }
+}

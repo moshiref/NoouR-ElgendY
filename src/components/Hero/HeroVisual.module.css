@@ -1,0 +1,162 @@
+.root {
+  position: absolute;
+  inset: 0 0 calc(-1 * var(--strip-overlap, 0px));
+  animation: visual-in 1200ms var(--ease-expo) 380ms both;
+}
+
+@keyframes visual-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0) scale(0.965);
+  }
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  perspective: 1400px;
+  perspective-origin: 50% 35%;
+  /* Scroll parallax: the portrait drifts up a little slower than the page. */
+  transform: translate3d(0, calc(var(--scroll, 0) * -70px), 0);
+}
+
+/* ---------- Back layers ---------- */
+
+.wordmark {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  translate: -50% 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(7rem, 14vw, 15rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(214, 207, 192, 0.17);
+  user-select: none;
+  pointer-events: none;
+  transform: translate3d(calc(var(--px, 0) * -22px), calc(var(--py, 0) * -12px), 0);
+  animation: wordmark-in 1600ms var(--ease-expo) 500ms both;
+}
+
+@keyframes wordmark-in {
+  from {
+    opacity: 0;
+    letter-spacing: 0.06em;
+  }
+}
+
+.halo {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 125%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(166, 155, 120, 0.2),
+    rgba(166, 155, 120, 0.07) 48%,
+    transparent 100%
+  );
+  transform: translate3d(calc(var(--px, 0) * -14px), calc(var(--py, 0) * -10px), 0);
+  pointer-events: none;
+}
+
+.ring {
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  width: min(86%, 32rem);
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border: 1px solid rgba(214, 207, 192, 0.13);
+  border-radius: 50%;
+  transform: translate3d(calc(var(--px, 0) * 8px), calc(var(--py, 0) * 6px), 0);
+  pointer-events: none;
+}
+
+.orbit {
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  animation: orbit 48s linear infinite;
+}
+
+.orbit::before {
+  content: '';
+  position: absolute;
+  top: -3.5px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 14px 2px rgba(166, 155, 120, 0.55);
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+/* ---------- The portrait ---------- */
+
+.tilt {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  transform: rotateY(calc(-5deg + var(--px, 0) * 6deg)) rotateX(calc(1.5deg - var(--py, 0) * 4deg))
+    translate3d(calc(var(--px, 0) * 12px), calc(var(--py, 0) * 6px), 0);
+  transform-origin: 50% 60%;
+  will-change: transform;
+}
+
+.float {
+  height: 100%;
+  animation: float 9s var(--ease-in-out) infinite alternate;
+  will-change: transform;
+}
+
+@keyframes float {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+.image {
+  width: auto;
+  max-width: none;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 100%;
+  user-select: none;
+  /* Depth shadow + a faint warm rim that separates the cut-out from the black. */
+  /* The bottom fade is baked into the asset's alpha (see scripts/optimize-hero.mjs). */
+  filter: drop-shadow(0 34px 44px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 1px rgba(214, 207, 192, 0.25));
+}
+
+@media (max-width: 900px) {
+  .wordmark {
+    top: 4%;
+    font-size: clamp(6rem, 30vw, 12rem);
+  }
+
+  .ring {
+    top: 30%;
+    width: min(78%, 26rem);
+  }
+
+  .tilt {
+    transform: rotateY(-4deg) rotateX(1deg);
+  }
+}
