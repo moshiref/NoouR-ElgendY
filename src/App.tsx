@@ -1,14 +1,21 @@
-import { useCallback } from 'react';
+import { Suspense, lazy, useCallback } from 'react';
 import type { MouseEvent as ReactMouseEvent } from 'react';
 import { About } from './components/About/About';
-import { AdminWork } from './components/Admin/AdminWork';
 import { Contact } from './components/Contact/Contact';
 import { Footer } from './components/Footer/Footer';
 import { Hero } from './components/Hero/Hero';
 import { Navbar } from './components/Navbar/Navbar';
 import { Work } from './components/Work/Work';
 import { isSectionHash, navigateHomeToSection, useHashRoute } from './lib/router';
-import { WorkCategoryPage } from './pages/WorkCategoryPage';
+
+/* Heavy routes are code-split so the public homepage never pays for the
+   Admin Dashboard (Supabase + storage) or the category video logic. */
+const AdminWork = lazy(() =>
+  import('./components/Admin/AdminWork').then((m) => ({ default: m.AdminWork })),
+);
+const WorkCategoryPage = lazy(() =>
+  import('./pages/WorkCategoryPage').then((m) => ({ default: m.WorkCategoryPage })),
+);
 
 export default function App() {
   const route = useHashRoute();
@@ -30,7 +37,8 @@ export default function App() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <Navbar onSectionNavigate={handleSectionNavigate} />
+      {route.name !== 'admin' && <Navbar onSectionNavigate={handleSectionNavigate} />}
+      <Suspense fallback={null}>
       {route.name === 'admin' ? (
         <main id="main" tabIndex={-1}>
           <AdminWork />
@@ -47,6 +55,7 @@ export default function App() {
           <Contact />
         </main>
       )}
+      </Suspense>
       <Footer />
     </>
   );

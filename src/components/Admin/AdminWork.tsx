@@ -85,8 +85,20 @@ export function AdminWork() {
 
   useEffect(() => {
     document.title = 'Work Admin — NoouR ElgendY';
+    /* Keep the dashboard out of search results (no visual change). */
+    let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    const created = !robots;
+    if (!robots) {
+      robots = document.createElement('meta');
+      robots.name = 'robots';
+      document.head.appendChild(robots);
+    }
+    const previous = robots.content;
+    robots.content = 'noindex, nofollow';
     return () => {
       document.title = 'NoouR ElgendY';
+      if (created) robots?.remove();
+      else if (robots) robots.content = previous;
     };
   }, []);
 
